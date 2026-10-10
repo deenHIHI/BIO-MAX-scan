@@ -3,256 +3,366 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BIO-MAX Plant Scanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIO-MAX | Plant Scanner</title>
 
   <style>
-    * { box-sizing: border-box; }
-
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 24px;
-      background: #f5f5eb;
-      color: #293b2b;
-      font-family: Arial, sans-serif;
+      padding: 0;
     }
 
-    main {
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7ef;
+      color: #243b2b;
+      min-height: 100vh;
+      padding: 30px 16px;
+    }
+
+    .container {
       max-width: 650px;
       margin: auto;
     }
 
-    .header, .panel {
-      padding: 24px;
-      margin-bottom: 18px;
-      border-radius: 18px;
+    header {
+      text-align: center;
+      margin-bottom: 28px;
     }
 
-    .header { background: #e4ebdc; }
-    .panel { background: white; border: 1px solid #e0e6da; }
-
-    .eyebrow {
-      color: #58734c;
-      font-weight: bold;
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      color: #28653c;
       letter-spacing: 2px;
-      font-size: 12px;
     }
 
-    .upload {
+    .subtitle {
+      margin-top: 8px;
+      color: #647363;
+      font-size: 14px;
+    }
+
+    .card {
+      background: white;
+      padding: 26px;
+      border-radius: 20px;
+      box-shadow: 0 8px 28px #244b2b12;
+    }
+
+    h2 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #6b776a;
+      line-height: 1.6;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .upload-area {
+      border: 2px dashed #a9c6a7;
+      background: #f8fbf5;
+      border-radius: 16px;
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    .leaf {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .upload-area p {
+      color: #627260;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    input[type="file"] {
       display: block;
-      padding: 20px;
-      border: 2px dashed #b8c7ae;
-      border-radius: 12px;
-    }
-
-    input { width: 100%; margin-top: 12px; }
-
-    button {
       width: 100%;
-      padding: 14px;
-      margin-top: 16px;
-      border: 0;
-      border-radius: 10px;
-      background: #526b45;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
+      max-width: 300px;
+      margin: 0 auto 12px;
+      font-size: 13px;
     }
-
-    button:disabled { opacity: 0.6; }
 
     #preview {
       display: none;
       width: 100%;
-      max-height: 350px;
+      max-height: 320px;
       object-fit: contain;
-      margin-top: 16px;
       border-radius: 12px;
+      margin-top: 16px;
+      background: #edf2e9;
     }
 
-    #status { line-height: 1.5; overflow-wrap: anywhere; }
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      background: #28653c;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+
+    button:hover {
+      background: #1d4d2d;
+    }
+
+    button:disabled {
+      background: #9aa99a;
+      cursor: not-allowed;
+    }
+
+    #status {
+      margin-top: 18px;
+      line-height: 1.6;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
 
     .result {
-      padding: 14px;
-      margin-top: 12px;
-      border-radius: 12px;
-      background: #f8f9f4;
+      border-top: 1px solid #e5ebe1;
+      padding: 18px 0;
     }
 
-    .score {
-      height: 8px;
-      background: #e1e8dc;
-      border-radius: 10px;
-      overflow: hidden;
+    .result:first-child {
+      border-top: none;
     }
 
-    .score div {
-      height: 100%;
-      background: #6e8c5b;
+    .plant-name {
+      font-size: 17px;
+      font-weight: bold;
+      color: #28653c;
     }
 
-    .muted { color: #687465; font-size: 13px; }
+    .scientific {
+      font-style: italic;
+      color: #647363;
+      margin-top: 5px;
+    }
+
+    .confidence {
+      margin-top: 9px;
+      font-size: 13px;
+      color: #596a58;
+    }
+
+    .notice {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #788374;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 24px;
+      color: #7b8877;
+      font-size: 12px;
+    }
   </style>
 </head>
 
 <body>
-<main>
-  <header class="header">
-    <div class="eyebrow">BIO-MAX · PLANT CARE</div>
-    <h1>Plant Scanner</h1>
-    <p>Upload a photo to identify your plant.</p>
-  </header>
+  <main class="container">
+    <header>
+      <div class="logo">BIO-MAX</div>
+      <p class="subtitle">Discover your plant. Learn how to care for it.</p>
+    </header>
 
-  <section class="panel">
-    <h2>Identify a Plant</h2>
+    <section class="card">
+      <h2>Identify Your Plant</h2>
 
-    <label class="upload">
-      Choose a plant photo
-      <input id="plantImage" type="file"
-        accept="image/jpeg,image/png,image/webp">
-    </label>
+      <p class="description">
+        Upload a clear photo of your plant. BIO-MAX will analyze
+        the image and suggest possible plant species.
+      </p>
 
-    <img id="preview" alt="Selected plant preview">
+      <div class="upload-area">
+        <div class="leaf">🌿</div>
+        <p>Choose a clear photo showing your plant's leaves or flowers.</p>
 
-    <button id="scanButton" type="button">Identify Plant</button>
-    <p id="status" role="status"></p>
-  </section>
+        <input
+          type="file"
+          id="plantImage"
+          accept="image/*"
+        >
 
-  <section class="panel" id="results" hidden>
-    <h2>Possible Matches</h2>
-    <div id="resultList"></div>
-  </section>
-</main>
+        <img id="preview" alt="Preview of your selected plant">
+      </div>
 
-<script>
-  // We will connect your API key safely in the next step.
-  const API_KEY = "ADD_API_KEY_LATER";
+      <button id="identifyButton" disabled>
+        Identify Plant
+      </button>
 
-  const imageInput = document.getElementById("plantImage");
-  const preview = document.getElementById("preview");
-  const scanButton = document.getElementById("scanButton");
-  const statusBox = document.getElementById("status");
-  const resultsBox = document.getElementById("results");
-  const resultList = document.getElementById("resultList");
+      <div id="status" aria-live="polite"></div>
+      <div id="results"></div>
+    </section>
 
-  let selectedFile = null;
+    <p class="notice">
+      Identification suggestions may not always be accurate.
+      Verify the result before making important plant-care decisions.
+    </p>
 
-  imageInput.addEventListener("change", () => {
-    selectedFile = imageInput.files[0] || null;
-    resultList.replaceChildren();
-    resultsBox.hidden = true;
-    statusBox.textContent = "";
+    <footer>
+      BIO-MAX · AI-Assisted Plant Care and Monitoring
+    </footer>
+  </main>
 
-    if (!selectedFile) {
-      preview.style.display = "none";
-      return;
-    }
+  <script>
+    // Replace this with your actual Cloudflare Worker URL.
+    const WORKER_URL =
+      "https://biomax-plant-api.deanbungaloncasaba.workers.dev/";
 
-    if (!["image/jpeg", "image/png", "image/webp"]
-        .includes(selectedFile.type)) {
+    const fileInput = document.getElementById("plantImage");
+    const preview = document.getElementById("preview");
+    const button = document.getElementById("identifyButton");
+    const status = document.getElementById("status");
+    const results = document.getElementById("results");
+
+    let selectedFile = null;
+    let previewUrl = null;
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+
       selectedFile = null;
-      imageInput.value = "";
-      preview.style.display = "none";
-      statusBox.textContent = "Please select a JPG, PNG, or WebP image.";
-      return;
-    }
+      button.disabled = true;
+      results.replaceChildren();
+      status.textContent = "";
 
-    preview.src = URL.createObjectURL(selectedFile);
-    preview.style.display = "block";
-  });
-
-  scanButton.addEventListener("click", identifyPlant);
-
-  async function identifyPlant() {
-    if (!selectedFile) {
-      statusBox.textContent = "Please choose a plant photo first.";
-      return;
-    }
-
-    if (API_KEY === "ADD_API_KEY_LATER") {
-      statusBox.textContent =
-        "The scanner is ready, but the API connection has not been configured yet.";
-      return;
-    }
-
-    scanButton.disabled = true;
-    scanButton.textContent = "Identifying...";
-    statusBox.textContent = "Contacting Pl@ntNet...";
-    resultsBox.hidden = true;
-    resultList.replaceChildren();
-
-    try {
-      const formData = new FormData();
-      formData.append("images", selectedFile);
-      formData.append("organs", "auto");
-
-      const url =
-        "https://my-api.plantnet.org/v2/identify/all" +
-        "?api-key=" + encodeURIComponent(API_KEY) +
-        "&lang=en&nb-results=5";
-
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "HTTP " + response.status);
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+        previewUrl = null;
       }
 
-      if (!data.results || !data.results.length) {
-        statusBox.textContent = "No likely matches found. Try another photo.";
+      if (!file) {
+        preview.style.display = "none";
+        preview.removeAttribute("src");
         return;
       }
 
-      statusBox.textContent = "Identification complete.";
+      if (!file.type.startsWith("image/")) {
+        status.textContent = "Please choose an image file.";
+        fileInput.value = "";
+        preview.style.display = "none";
+        return;
+      }
 
-      data.results.forEach((item, index) => {
-        const species = item.species || {};
-        const name =
-          species.scientificNameWithoutAuthor ||
-          species.scientificName || "Unknown species";
-        const score = Math.max(0, Math.min(100, (item.score || 0) * 100));
+      // Keep uploads manageable for the demo.
+      if (file.size > 10 * 1024 * 1024) {
+        status.textContent =
+          "This image is too large. Please choose an image under 10 MB.";
+        fileInput.value = "";
+        preview.style.display = "none";
+        return;
+      }
 
-        const card = document.createElement("article");
-        card.className = "result";
+      selectedFile = file;
+      previewUrl = URL.createObjectURL(file);
+      preview.src = previewUrl;
+      preview.style.display = "block";
+      button.disabled = false;
+    });
 
-        const title = document.createElement("h3");
-        title.textContent = (index === 0 ? "🌿 " : "") + name;
+    button.addEventListener("click", async () => {
+      if (!selectedFile) {
+        status.textContent = "Please upload a plant photo first.";
+        return;
+      }
 
-        const common = document.createElement("p");
-        common.className = "muted";
-        common.textContent = (species.commonNames || []).slice(0, 3).join(", ")
-          || "Common name unavailable";
+      if (WORKER_URL.includes("PASTE-YOUR")) {
+        status.textContent =
+          "Setup needed: add your Cloudflare Worker URL in the code.";
+        return;
+      }
 
-        const scoreText = document.createElement("p");
-        scoreText.textContent = "Match score: " + score.toFixed(1) + "%";
+      button.disabled = true;
+      status.textContent = "Identifying your plant...";
+      results.replaceChildren();
 
-        const bar = document.createElement("div");
-        bar.className = "score";
+      try {
+        const formData = new FormData();
 
-        const fill = document.createElement("div");
-        fill.style.width = score + "%";
-        bar.appendChild(fill);
+        // This field name must match the Cloudflare Worker.
+        formData.append("images", selectedFile);
 
-        card.append(title, common, scoreText, bar);
-        resultList.appendChild(card);
-      });
+        const response = await fetch(WORKER_URL, {
+          method: "POST",
+          body: formData
+        });
 
-      resultsBox.hidden = false;
+        const data = await response.json();
 
-    } catch (error) {
-      statusBox.textContent =
-        "Identification failed: " + error.message +
-        ". Check the API setup and authorization settings.";
-    } finally {
-      scanButton.disabled = false;
-      scanButton.textContent = "Identify Plant";
-    }
-  }
-</script>
+        if (!response.ok) {
+          throw new Error(
+            data.error || data.message ||
+            "The identification service returned an error (" +
+            response.status + ")."
+          );
+        }
+
+        if (!Array.isArray(data.results) || data.results.length === 0) {
+          status.textContent =
+            "No likely match was found. Try a clearer photo of the leaves or flowers.";
+          return;
+        }
+
+        status.textContent = "Here are the most likely matches:";
+
+        data.results.slice(0, 5).forEach((item) => {
+          const species = item.species || {};
+          const scientificName =
+            species.scientificNameWithoutAuthor ||
+            species.scientificName ||
+            "Unknown species";
+
+          const commonNames = Array.isArray(species.commonNames)
+            ? species.commonNames
+            : [];
+
+          const article = document.createElement("div");
+          article.className = "result";
+
+          const name = document.createElement("div");
+          name.className = "plant-name";
+          name.textContent = commonNames.length
+            ? commonNames[0]
+            : scientificName;
+
+          const scientific = document.createElement("div");
+          scientific.className = "scientific";
+          scientific.textContent = scientificName;
+
+          const confidence = document.createElement("div");
+          confidence.className = "confidence";
+          confidence.textContent =
+            "Match confidence: " +
+            (Number(item.score) * 100).toFixed(1) + "%";
+
+          article.append(name, scientific, confidence);
+          results.appendChild(article);
+        });
+
+      } catch (error) {
+        status.textContent =
+          "Identification failed: " +
+          (error.message || "Please try again.");
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
+
